@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-primary: #ccff00; /* Cyber-Lime */
+  --color-neon-secondary: #00ffcc;
+  --color-neon-accent: #ff00ff;
+  --color-os-bg: #050505;
+  --color-os-surface: #0a0a0a;
+  --color-os-border: #1a1a1a;
+  --color-os-text: #e0e0e0;
+  
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --animate-flicker: flicker 0.15s infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-glitch: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-os-bg);
+    --foreground: var(--color-os-text);
+  }
+
+  body {
+    background-color: var(--color-os-bg);
+    color: var(--color-os-text);
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+    min-height: 100vh;
+    width: 100vw;
+  }
+}
+
+@layer utilities {
+  .text-shadow-neon {
+    text-shadow: 0 0 5px var(--color-neon-primary), 0 0 10px var(--color-neon-primary);
+  }
+  
+  .border-neon {
+    border-color: var(--color-neon-primary);
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.3);
+  }
+
+  .border-neon-active {
+    border-color: var(--color-neon-primary);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.5);
+  }
+
+  .border-text-os {
+    -webkit-text-stroke: 1px var(--color-os-text);
+    opacity: 0.2;
+  }
+
+  .glass-panel {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-os-border);
+  }
+
+  .crt-overlay::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 100;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  25% { opacity: 0.95; }
+  30% { opacity: 1; }
+  35% { opacity: 0.95; }
+  45% { opacity: 0.95; }
+  50% { opacity: 1; }
+  55% { opacity: 0.95; }
+  60% { opacity: 0.95; }
+  70% { opacity: 1; }
+  85% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(204, 255, 0, 0.05);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 150;
+  animation: scanline 10s linear infinite;
+}
+
+.grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(204, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(204, 255, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Custom Cyberpunk Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-os-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(204, 255, 0, 0.1);
+  border-radius: 10px;
+  border: 1px solid rgba(204, 255, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(204, 255, 0, 0.3);
+  box-shadow: 0 0 10px var(--color-neon-primary);
+}
+
+/* Specific Window Scrollbar */
+.os-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.os-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-neon-primary);
+  opacity: 0.3;
+}
+
+.os-scrollbar::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(204, 255, 0, 0.2) var(--color-os-bg);
+}
