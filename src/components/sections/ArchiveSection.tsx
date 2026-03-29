@@ -7,16 +7,87 @@ import { ExternalLink, GitBranch, FileText, ChevronRight } from "lucide-react";
 export default function ArchiveSection() {
   return (
     <section className="relative py-24 px-6 max-w-7xl mx-auto z-10">
-      <div className="flex flex-col mb-16">
-        <div className="flex items-center gap-4 mb-2">
-            <div className="h-[2px] w-12 bg-neon-primary" />
-            <span className="text-neon-primary font-mono text-sm font-bold tracking-[0.3em] uppercase">
-                System_Archives // Decrypted
-            </span>
+      <div className="flex flex-col mb-16 cursor-default group/title w-fit relative">
+        {/* Top Secret Label */}
+        <div className="flex items-center gap-4 mb-4 opacity-40 group-hover/title:opacity-100 transition-opacity">
+            <div className="p-1 px-2 border border-neon-primary/40 rounded text-[10px] font-black tracking-widest text-neon-primary flex items-center gap-2 uppercase">
+                <div className="w-1.5 h-1.5 rounded-full bg-neon-primary animate-pulse" />
+                TOP SECRET // LEVEL 5 CLEARANCE
+            </div>
+            <div className="h-[1px] flex-1 bg-neon-primary/20 min-w-[100px]" />
         </div>
-        <h2 className="text-5xl md:text-7xl font-black text-os-text tracking-tighter uppercase leading-tight">
-            Past <span className="text-neon-primary">Operations</span>
-        </h2>
+
+        <div className="flex flex-col relative">
+            {/* The "Revealed" Text (MISSION) */}
+            <motion.div 
+                className="relative"
+                whileHover="hover"
+                initial="initial"
+            >
+                <motion.h3 
+                    className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-none opacity-0 group-hover/title:opacity-100 transition-opacity duration-75 select-none"
+                    variants={{
+                        initial: { 
+                            x: 0, 
+                            textShadow: "2px 2px 0px rgba(0,255,255,0.2), -2px -2px 0px rgba(255,0,255,0.2)" 
+                        },
+                        hover: {
+                            x: [0, -5, 5, -3, 3, 0],
+                            color: ["#ffffff", "#ff0000", "#00ffff", "#ffffff"],
+                            textShadow: [
+                                "4px 0px 0px #ff00ff, -4px 0px 0px #00ffff",
+                                "-4px 0px 0px #ff00ff, 4px 0px 0px #00ffff",
+                                "0px 0px 0px #ff00ff, 0px 0px 0px #00ffff",
+                                "4px 0px 0px #ff00ff, -4px 0px 0px #00ffff"
+                            ],
+                            transition: {
+                                repeat: Infinity,
+                                duration: 0.12,
+                                ease: "linear",
+                            }
+                        }
+                    }}
+                >
+                   Mission
+                </motion.h3>
+
+                {/* Tactical Reticle Overlay - only on Mission Hover */}
+                <motion.div 
+                    variants={{
+                        initial: { opacity: 0, scale: 2 },
+                        hover: { opacity: 1, scale: 1 }
+                    }}
+                    className="absolute top-1/2 left-1/4 -translate-y-1/2 -translate-x-1/2 pointer-events-none z-20 transition-all duration-150"
+                >
+                    <div className="w-16 h-16 md:w-24 md:h-24 border-2 border-neon-secondary/40 rounded-full flex items-center justify-center">
+                        <div className="w-full h-[1px] bg-neon-secondary/40 absolute" />
+                        <div className="h-full w-[1px] bg-neon-secondary/40 absolute" />
+                        <div className="w-4 h-4 md:w-6 md:h-6 border border-neon-secondary rounded-full bg-neon-secondary/10" />
+                    </div>
+                </motion.div>
+            </motion.div>
+            
+            {/* The "Main" Text (ARCHIVES) */}
+            <motion.h2 
+                className="text-5xl md:text-8xl font-black text-neon-primary tracking-tighter uppercase leading-none mt-[-5px] w-fit"
+                whileHover="hover"
+                initial="initial"
+                variants={{
+                    initial: { color: "#ccff00", x: 0 },
+                    hover: {
+                        color: ["#ccff00", "#ffffff", "#ff0000", "#ccff00"],
+                        x: [0, 2, -2, 1, -1, 0],
+                        transition: {
+                            repeat: Infinity,
+                            duration: 0.1,
+                            ease: "linear",
+                        }
+                    }
+                }}
+            >
+                Archives
+            </motion.h2>
+        </div>
       </div>
 
       <div className="space-y-12">
