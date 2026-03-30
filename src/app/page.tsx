@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import TopBar from "@/components/os/TopBar";
+import FloatingNav from "@/components/os/FloatingNav";
+import CommandPalette from "@/components/os/CommandPalette";
 import Dock from "@/components/os/Dock";
 import OSWindow from "@/components/os/OSWindow";
 import Terminal from "@/components/os/Terminal";
@@ -34,6 +35,7 @@ export default function Home() {
   const [focusedWindowId, setFocusedWindowId] = useState<string | null>("terminal");
   const [isMobile, setIsMobile] = useState(false);
   const [activeMobileTab, setActiveMobileTab] = useState("home");
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -45,7 +47,19 @@ export default function Home() {
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+
+    const handleGlobalKeys = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsPaletteOpen(prev => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeys);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("keydown", handleGlobalKeys);
+    };
   }, []);
 
   const toggleWindow = (id: string) => {
@@ -120,12 +134,17 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className="flex flex-col w-full"
           >
-            <div className="sticky top-0 z-[110]">
-               <TopBar />
-            </div>
+            <>
+              <FloatingNav onSearchClick={() => setIsPaletteOpen(true)} />
+              <CommandPalette 
+                isOpen={isPaletteOpen} 
+                onClose={() => setIsPaletteOpen(false)} 
+                onNavigate={(id) => toggleWindow(id)}
+              />
+            </>
             
             {/* Main Application Layer */}
-            <div className={`relative ${isMobile ? 'min-h-screen' : 'h-[calc(100vh-40px)] p-6'} overflow-hidden shrink-0`}>
+            <div id="os-root" className={`relative ${isMobile ? 'min-h-screen' : 'h-[calc(100vh-40px)] p-6'} overflow-hidden shrink-0`}>
               
               {isMobile ? (
                 /* Mobile Tabbed Dashboard */
