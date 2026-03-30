@@ -197,7 +197,7 @@ export default function GithubStatsSection() {
   };
 
   return (
-    <section className="relative py-32 px-6 max-w-7xl mx-auto z-10 font-mono">
+    <section className="relative py-12 px-6 max-w-7xl mx-auto z-10 font-mono">
       <div className="flex flex-col mb-20 text-center md:text-left">
         <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
             <div className="h-[2px] w-16 bg-neon-secondary" />

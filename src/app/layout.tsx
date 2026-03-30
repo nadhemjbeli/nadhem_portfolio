@@ -20,14 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body 
-        className="antialiased select-none overflow-hidden bg-os-bg text-os-text font-mono h-full"
+        className="antialiased select-none overflow-x-hidden bg-os-bg text-os-text font-mono"
         suppressHydrationWarning
       >
         <MatrixBackground />
         <div className="fixed inset-0 grid-bg pointer-events-none" />
         <div className="scanline" />
         
-        <main className="relative h-full w-full flex flex-col z-10">
+        <main className="relative w-full flex flex-col z-10">
           {children}
         </main>
       </body>

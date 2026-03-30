@@ -6,7 +6,7 @@ import { ExternalLink, GitBranch, FileText, ChevronRight } from "lucide-react";
 
 export default function ArchiveSection() {
   return (
-    <section className="relative py-24 px-6 max-w-7xl mx-auto z-10">
+    <section className="relative py-12 px-6 max-w-7xl mx-auto z-10">
       <div className="flex flex-col mb-16 cursor-default group/title w-fit relative">
         {/* Top Secret Label */}
         <div className="flex items-center gap-4 mb-4 opacity-40 group-hover/title:opacity-100 transition-opacity">
