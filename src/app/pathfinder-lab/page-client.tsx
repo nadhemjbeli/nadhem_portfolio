@@ -26,10 +26,10 @@ export default function PathfinderLabClient() {
   const [gridSize, setGridSize] = useState(15);
   const [speed, setSpeed] = useState(1);
 
-  const startNode: [number, number] = [Math.floor(gridSize / 2), 2];
-  const endNode: [number, number] = [Math.floor(gridSize / 2), gridSize - 3];
+  const startNode: [number, number] = useMemo(() => [Math.floor(gridSize / 2), 2], [gridSize]);
+  const endNode: [number, number] = useMemo(() => [Math.floor(gridSize / 2), gridSize - 3], [gridSize]);
 
-  const wallEditor = useWallEditor(createGrid(gridSize, gridSize), startNode, endNode);
+  const wallEditor = useWallEditor(useMemo(() => createGrid(gridSize, gridSize), [gridSize]), startNode, endNode);
   const challenge = usePathfinderChallenge();
 
   const algoMeta = ALGORITHMS.find((a) => a.id === selectedAlgo)!;

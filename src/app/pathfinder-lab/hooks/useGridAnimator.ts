@@ -43,7 +43,7 @@ export function useGridAnimator({ steps, onPauseForChallenge }: UseGridAnimatorO
 
       if (!isPausedRef.current) {
         // Grid animation is slower — cells need time to render
-        const delay = 120 / speedRef.current;
+        const delay = Math.max(16, 120 / speedRef.current);
         timeoutRef.current = setTimeout(() => advance(idx + 1), delay);
       }
     },

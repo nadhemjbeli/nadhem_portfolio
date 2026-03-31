@@ -51,7 +51,7 @@ export function usePathfinderChallenge() {
   const answerNode = useCallback(
     (row: number, col: number, onComplete: () => void) => {
       setState((s) => {
-        if (!s.expectedNode) return s;
+        if (!s.waitingForInput || !s.expectedNode) return s;
         const [er, ec] = s.expectedNode;
         const isCorrect = row === er && col === ec;
 
@@ -64,6 +64,7 @@ export function usePathfinderChallenge() {
           streak: isCorrect ? s.streak + 1 : 0,
           lastFeedback: isCorrect ? "correct" : "incorrect",
           waitingForInput: false,
+          expectedNode: null,
         };
       });
     },
