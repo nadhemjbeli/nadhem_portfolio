@@ -1,0 +1,42 @@
+/* ─── Cyber-OS Highlight.js Theme ─── */
+/* Applied only inside .blog-content pre code blocks */
+
+.hljs { color: #e0e0e0; background: transparent; }
+
+/* Keywords: def, class, import, return, if, for, async, await */
+.hljs-keyword,
+.hljs-built_in,
+.hljs-type { color: #00ffcc; }
+
+/* Strings */
+.hljs-string,
+.hljs-template-string { color: #aaff00; }
+
+/* Functions & class names */
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.function_ { color: #ffd700; }
+
+/* Decorators (@app.on_event) */
+.hljs-meta { color: #00ffcc; }
+
+/* Numbers */
+.hljs-number,
+.hljs-literal { color: #ff9f43; }
+
+/* Comments */
+.hljs-comment { color: rgba(224, 224, 224, 0.3); font-style: italic; }
+
+/* Variables, params */
+.hljs-variable,
+.hljs-params { color: #e0e0e0; }
+
+/* Attributes / keys */
+.hljs-attr,
+.hljs-property { color: #00ffcc; }
+
+/* Operators */
+.hljs-operator { color: rgba(224, 224, 224, 0.6); }
+
+/* Punctuation */
+.hljs-punctuation { color: rgba(224, 224, 224, 0.4); }

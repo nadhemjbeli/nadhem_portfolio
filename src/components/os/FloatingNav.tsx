@@ -26,8 +26,7 @@ export default function FloatingNav({ onSearchClick, activeTab = "home" }: Float
         { label: "Pathfinder_Lab", href: "/pathfinder-lab", id: "pathfinder-lab" },
       ]
     },
-    { label: "Blog", href: "#", id: "blog" },
-    { label: "Guestbook", href: "#", id: "guestbook" },
+    { label: "Blog", href: "/blog", id: "blog" },
   ];
 
   useEffect(() => {

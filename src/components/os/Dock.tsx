@@ -49,6 +49,7 @@ export default function Dock({ activeWindows, onToggle, isMobile }: DockProps) {
           return (
             <motion.button
               key={item.id}
+              id={item.id === "contact" ? "dock-contact-btn" : undefined}
               onClick={() => onToggle(item.id)}
               onMouseEnter={() => setHovered(item.id)}
               onMouseLeave={() => setHovered(null)}

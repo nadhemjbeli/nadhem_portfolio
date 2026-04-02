@@ -3,7 +3,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Search } from "lucide-react";
 
 import { ALGORITHMS, createGrid, randomizeWalls } from "./algorithms";
 import type { AlgorithmId, Mode, TraversalStep } from "./algorithms/types";
