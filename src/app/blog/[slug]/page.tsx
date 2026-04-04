@@ -5,6 +5,7 @@ import hljs from "highlight.js";
 import { connectDB } from "@/lib/db";
 import { Post } from "@/models/Post";
 import type { IPost, PostSection } from "@/models/Post";
+import BlogScrollEnhancer from "./BlogScrollEnhancer";
 
 export const dynamic = "force-dynamic";
 
@@ -60,6 +61,7 @@ export default async function BlogPostPage({
 
   return (
     <div className="min-h-screen bg-os-bg font-mono pb-24">
+      <BlogScrollEnhancer />
       {/* ── Sticky header ───────────────────────── */}
       <header className="border-b border-os-border/20 bg-os-bg/90 backdrop-blur-xl sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
