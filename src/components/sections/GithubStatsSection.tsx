@@ -88,8 +88,8 @@ const GithubHeatmap = ({ contributions, isLoading }: { contributions: any[], isL
                 <span>FRI</span>
             </div>
 
-            <div className="flex-1 overflow-x-auto pb-4 custom-scrollbar px-2 bg-os-surface/10 rounded-lg p-4 border border-os-border/10">
-                <div className="w-[820px]">
+            <div className="flex-1 overflow-x-auto pb-4 custom-scrollbar px-2 bg-os-surface/10 rounded-lg p-4 border border-os-border/10 touch-pan-x select-none pointer-events-auto">
+                <div className="w-[820px] min-w-full">
                     <div className="grid grid-cols-12 text-[10px] text-os-text/20 mb-3 font-black select-none px-2 uppercase tracking-tighter">
                         {months.map(m => <span key={m} className="text-center">{m}</span>)}
                     </div>
@@ -197,7 +197,7 @@ export default function GithubStatsSection() {
   };
 
   return (
-    <section className="relative py-12 px-6 max-w-7xl mx-auto z-10 font-mono">
+    <section className="relative py-12 px-4 md:px-6 max-w-7xl mx-auto z-10 font-mono">
       <div className="flex flex-col mb-20 text-center md:text-left">
         <div className="flex items-center justify-center md:justify-start gap-4 mb-4">
             <div className="h-[2px] w-16 bg-neon-secondary" />
@@ -218,7 +218,7 @@ export default function GithubStatsSection() {
         </div>
 
         {/* Middle: Extended Stats (Full Width) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 text-center md:grid-cols-3 md:text-left lg:grid-cols-6 lg:text-left xl:text-left gap-4">
             {[
                 { label: "Hireable", value: profile?.hireable ? "READY" : "BUSY", icon: Activity, color: "text-blue-400" },
                 { label: "Followers", value: profile?.followers || "--", icon: Users, color: "text-neon-secondary" },
@@ -233,7 +233,7 @@ export default function GithubStatsSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     className="glass-panel p-6 border-os-border/20 flex flex-col gap-3 hover:border-os-text/20 transition-all hover:-translate-y-1 bg-os-bg/30"
                 >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
                         <stat.icon size={14} className={stat.color} />
                         <span className="text-[11px] font-black text-os-text/40 uppercase tracking-[0.2em]">{stat.label}</span>
                     </div>

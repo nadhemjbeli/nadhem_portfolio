@@ -5,6 +5,9 @@ import MatrixBackground from "@/components/effects/MatrixBackground";
 export const metadata: Metadata = {
   title: "Nadhem Jbeli — Backend Engineer",
   description: "Backend Engineer specialized in NestJS, Node.js, GCP and AI-powered SaaS. Available for remote opportunities.",
+  icons: {
+    icon: "/images/backend-icon.png",
+  },
   openGraph: {
     title: "Nadhem Jbeli — Backend Engineer",
     description: "Backend Engineer specialized in NestJS, Node.js, GCP and AI-powered SaaS. Available for remote opportunities.",

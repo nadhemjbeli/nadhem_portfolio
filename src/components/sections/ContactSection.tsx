@@ -22,7 +22,7 @@ export default function ContactSection() {
       <div className="absolute inset-0 grid-bg opacity-5" />
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neon-secondary/20 to-transparent shadow-[0_0_20px_rgba(0,255,204,0.1)]" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
           {/* Left Column: Heading & Info */}
           <div className="flex-1 max-w-2xl space-y-8">
