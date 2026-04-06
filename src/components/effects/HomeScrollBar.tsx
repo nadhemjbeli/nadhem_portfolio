@@ -3,18 +3,16 @@
 import { useState } from "react";
 import { useLenis } from "lenis/react";
 
-export default function BlogScrollEnhancer() {
+export default function HomeScrollBar() {
   const [progress, setProgress] = useState(0);
 
-  // Hook into Lenis's own scroll callback — fires every animation frame,
-  // giving the same interpolated position that the smooth scroll uses.
   useLenis(({ scroll, limit }) => {
     setProgress(limit > 0 ? (scroll / limit) * 100 : 0);
   });
 
   return (
     <>
-      {/* Neon progress bar — fixed at top of viewport, 12px tall to match dot */}
+      {/* Neon progress bar — 12px, secondary color, low opacity */}
       <div
         aria-hidden="true"
         className="fixed top-0 left-0 z-[200] pointer-events-none"

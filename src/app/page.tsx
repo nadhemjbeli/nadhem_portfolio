@@ -19,7 +19,7 @@ import MobileSystemView from "@/components/os/MobileSystemView";
 import DesktopHero from "@/components/os/DesktopHero";
 import GridSpotlight from "@/components/effects/GridSpotlight";
 import SmoothScroll from "@/components/effects/SmoothScroll";
-import ScrollProgressRing from "@/components/os/ScrollProgressRing";
+import HomeScrollBar from "@/components/effects/HomeScrollBar";
 import { Terminal as TerminalIcon, Activity, ListChecks, Mail } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -140,7 +140,7 @@ export default function Home() {
             <SmoothScroll>
               <>
                 <FloatingNav onSearchClick={() => setIsPaletteOpen(true)} />
-                <ScrollProgressRing />
+                <HomeScrollBar />
                 <CommandPalette 
                   isOpen={isPaletteOpen} 
                   onClose={() => setIsPaletteOpen(false)} 
