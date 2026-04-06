@@ -30,6 +30,8 @@ export default function FloatingNav({ onSearchClick, activeTab = "home" }: Float
   ];
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     // 1. Intersection Observer to detect if we've left the top (Hero) area
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -38,29 +40,37 @@ export default function FloatingNav({ onSearchClick, activeTab = "home" }: Float
       { threshold: 0 }
     );
 
-    const hero = document.getElementById("os-root");
-    if (hero) observer.observe(hero);
+    const mainSec = document.getElementById("os-root");
+    if (mainSec) observer.observe(mainSec);
 
-    // 2. Direct Wheel Detection for Headroom behavior
-    const handleWheel = (e: WheelEvent) => {
-        if (isPastHero) {
-            if (e.deltaY < -10) {
-                setIsVisible(true);
-            } else if (e.deltaY > 10) {
-                setIsVisible(false);
-                if (isMenuOpen) setIsMenuOpen(false);
-            }
-        } else {
-            setIsVisible(false);
-            if (isMenuOpen) setIsMenuOpen(false);
+    // 2. Headroom Logic: Visible on scroll up, hidden on scroll down
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Only show headroom nav when we are past the hero section
+      if (isPastHero) {
+        if (currentScrollY < lastScrollY - 5) {
+          // Scrolling Up
+          setIsVisible(true);
+        } else if (currentScrollY > lastScrollY + 5) {
+          // Scrolling Down
+          setIsVisible(false);
+          if (isMenuOpen) setIsMenuOpen(false);
         }
+      } else {
+        // At the very top/Hero
+        setIsVisible(false);
+        if (isMenuOpen) setIsMenuOpen(false);
+      }
+      
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-        if (hero) observer.unobserve(hero);
-        window.removeEventListener("wheel", handleWheel);
+      if (mainSec) observer.unobserve(mainSec);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [isPastHero, isMenuOpen]);
 

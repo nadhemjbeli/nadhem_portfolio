@@ -37,7 +37,7 @@ export default function Dock({ activeWindows, onToggle, isMobile }: DockProps) {
   const items = isMobile ? MOBILE_DOCK_ITEMS : DOCK_ITEMS;
 
   return (
-    <div className={`${isMobile ? 'fixed bottom-8' : 'absolute bottom-6'} left-0 w-full flex justify-center px-4 pointer-events-none z-[100]`}>
+    <div className={`${isMobile ? 'absolute bottom-8' : 'absolute bottom-6'} left-0 w-full flex justify-center px-4 pointer-events-none z-[100]`}>
       <motion.div 
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
