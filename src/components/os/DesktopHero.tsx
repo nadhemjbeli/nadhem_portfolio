@@ -56,15 +56,27 @@ export default function DesktopHero() {
                 <span>STATUS: AVAILABLE</span>
             </div>
 
-            <motion.button
-                onClick={handleInitiateContact}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-fit flex items-center gap-4 px-10 py-4 bg-neon-primary text-black font-black text-sm tracking-[0.3em] uppercase rounded-md shadow-[0_0_40px_rgba(204,255,0,0.3)] hover:shadow-[0_0_60px_rgba(204,255,0,0.5)] transition-shadow group"
-            >
-                INITIATE CONTACT()
-                <ChevronRight className="transform group-hover:translate-x-2 transition-transform" />
-            </motion.button>
+            <div className="flex flex-wrap gap-4 items-center">
+                <motion.button
+                    onClick={handleInitiateContact}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-4 px-10 py-4 bg-neon-primary text-black font-black text-sm tracking-[0.3em] uppercase rounded-md shadow-[0_0_40px_rgba(204,255,0,0.3)] hover:shadow-[0_0_60px_rgba(204,255,0,0.5)] transition-shadow group"
+                >
+                    INITIATE CONTACT()
+                    <ChevronRight className="transform group-hover:translate-x-2 transition-transform" />
+                </motion.button>
+
+                <motion.a
+                    href="/nadhem_jbeli_cv_english.pdf"
+                    download="Nadhem_Jbeli_CV.pdf"
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(204,255,0,0.1)" }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-4 px-10 py-4 border border-neon-primary/30 text-neon-primary font-black text-sm tracking-[0.3em] uppercase rounded-md hover:border-neon-primary/60 transition-all duration-300 group"
+                >
+                    DOWNLOAD_DOSSIER[PDF]
+                </motion.a>
+            </div>
         </div>
       </motion.div>
 

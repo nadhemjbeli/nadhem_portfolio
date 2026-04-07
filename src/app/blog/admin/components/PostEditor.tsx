@@ -180,28 +180,43 @@ export default function PostEditor({ token, editPost, onSaved, onCancel }: Props
     "w-full bg-transparent border border-os-border/30 rounded px-3 py-2 text-[12px] text-os-text/80 font-mono focus:outline-none focus:border-neon-primary/50 placeholder:text-os-text/20 transition-colors";
   const labelCls = "block text-[9px] font-black uppercase tracking-[0.3em] text-os-text/30 mb-1.5";
 
-  const TagInput = ({
-    field, inputKey, label, placeholder,
-  }: { field: TagField; inputKey: InputKey; label: string; placeholder: string }) => (
+/* ── Tag Input Component (Defined outside to avoid re-mounting & focus loss) ── */
+
+interface TagInputProps {
+  label: string;
+  placeholder: string;
+  value: string;
+  items: string[];
+  onChange: (val: string) => void;
+  onAdd: () => void;
+  onRemove: (idx: number) => void;
+}
+
+const TagInput = ({ label, placeholder, value, items, onChange, onAdd, onRemove }: TagInputProps) => {
+  const inputCls = "w-full bg-transparent border border-os-border/30 rounded px-3 py-2 text-[12px] text-os-text/80 font-mono focus:outline-none focus:border-neon-primary/50 placeholder:text-os-text/20 transition-colors";
+  const labelCls = "block text-[9px] font-black uppercase tracking-[0.3em] text-os-text/30 mb-1.5";
+
+  return (
     <div>
       <label className={labelCls}>{label}</label>
       <div className="flex gap-2 mb-2">
         <input
           className={`${inputCls} flex-1`}
           placeholder={placeholder}
-          value={tagInputs[inputKey]}
-          onChange={(e) => setTagInputs((t) => ({ ...t, [inputKey]: e.target.value }))}
-          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addTag(field, inputKey); } }}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); onAdd(); } }}
         />
-        <button onClick={() => addTag(field, inputKey)} className="px-3 py-2 text-[10px] font-black uppercase tracking-widest border border-neon-primary/30 text-neon-primary hover:bg-neon-primary/10 rounded transition-colors">
+        <button onClick={(e) => { e.preventDefault(); onAdd(); }} className="px-3 py-2 text-[10px] font-black uppercase tracking-widest border border-neon-primary/30 text-neon-primary hover:bg-neon-primary/10 rounded transition-colors">
           + ADD
         </button>
       </div>
       <div className="flex flex-wrap gap-2 min-h-6">
-        {form.content[field].map((item, i) => (
+        {items.map((item, i) => (
           <button
             key={i}
-            onClick={() => removeTag(field, i)}
+            type="button"
+            onClick={() => onRemove(i)}
             className="px-2.5 py-1 text-[9px] font-black uppercase tracking-wider border border-os-border/30 text-os-text/40 rounded hover:border-red-500/50 hover:text-red-400 transition-colors"
           >
             {item} ×
@@ -210,6 +225,7 @@ export default function PostEditor({ token, editPost, onSaved, onCancel }: Props
       </div>
     </div>
   );
+};
 
   return (
     <div className="space-y-8">
@@ -334,9 +350,33 @@ export default function PostEditor({ token, editPost, onSaved, onCancel }: Props
       {/* ── Tags ──────────────────────────────────── */}
       <div className="glass-panel border border-os-border/20 rounded-xl p-6 space-y-6">
         <div className="text-[9px] font-black tracking-[0.4em] text-neon-primary/60 uppercase mb-2">LISTS_&amp;_TAGS</div>
-        <TagInput field="lessonsLearned" inputKey="lessons" label="Lessons Learned" placeholder="Add a lesson and press Enter..." />
-        <TagInput field="techStack" inputKey="tech" label="Tech Stack" placeholder="Python, FastAPI, Redis..." />
-        <TagInput field="performanceMetrics" inputKey="metrics" label="Performance Metrics" placeholder="&lt;50ms, 10k req/s..." />
+        <TagInput 
+          label="Lessons Learned" 
+          placeholder="Add a lesson and press Enter..." 
+          value={tagInputs.lessons}
+          items={form.content.lessonsLearned}
+          onChange={(val) => setTagInputs(t => ({ ...t, lessons: val }))}
+          onAdd={() => addTag("lessonsLearned", "lessons")}
+          onRemove={(idx) => removeTag("lessonsLearned", idx)}
+        />
+        <TagInput 
+          label="Tech Stack" 
+          placeholder="Python, FastAPI, Redis..." 
+          value={tagInputs.tech}
+          items={form.content.techStack}
+          onChange={(val) => setTagInputs(t => ({ ...t, tech: val }))}
+          onAdd={() => addTag("techStack", "tech")}
+          onRemove={(idx) => removeTag("techStack", idx)}
+        />
+        <TagInput 
+          label="Performance Metrics" 
+          placeholder="<50ms, 10k req/s..." 
+          value={tagInputs.metrics}
+          items={form.content.performanceMetrics}
+          onChange={(val) => setTagInputs(t => ({ ...t, metrics: val }))}
+          onAdd={() => addTag("performanceMetrics", "metrics")}
+          onRemove={(idx) => removeTag("performanceMetrics", idx)}
+        />
       </div>
 
       {/* ── Error ─────────────────────────────────── */}

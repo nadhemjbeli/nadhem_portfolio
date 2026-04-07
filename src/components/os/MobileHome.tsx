@@ -32,7 +32,7 @@ export default function MobileHome() {
             Building scalable services and mission-critical APIs. Specializing in <span className="text-os-text font-black">Node.js</span>, <span className="text-os-text font-black">NestJS</span>, <span className="text-os-text font-black">React</span>, <span className="text-os-text font-black">Docker</span>, and <span className="text-os-text font-black">GCP</span>. Turning complex data pipelines into elegant, manageable code.
         </p>
 
-        <div className="flex flex-wrap gap-2 pt-4 border-t border-os-border/10">
+        <div className="flex flex-wrap gap-2 pt-4 border-t border-os-border/10 mb-6">
             <span className="text-[10px] text-os-text/30 font-black uppercase tracking-widest mr-2 py-1">Core Stack::</span>
             {skills.map(skill => (
                 <span key={skill} className="px-3 py-1 rounded-full bg-os-surface/50 border border-os-border/20 text-[10px] font-black text-os-text/60 uppercase tracking-wider group-hover:border-neon-primary/30 transition-colors">
@@ -40,6 +40,16 @@ export default function MobileHome() {
                 </span>
             ))}
         </div>
+
+        <motion.a 
+            href="/nadhem_jbeli_cv_english.pdf"
+            download="Nadhem_Jbeli_CV.pdf"
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center justify-center gap-3 w-full py-4 bg-neon-primary/10 border border-neon-primary/30 rounded-xl text-neon-primary font-black text-[12px] uppercase tracking-[0.3em] shadow-[0_0_20px_rgba(204,255,0,0.1)] active:bg-neon-primary/20 transition-all"
+        >
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            ACCESS_DOSSIER (PDF)
+        </motion.a>
       </div>
 
       {/* Metrics Grid */}
